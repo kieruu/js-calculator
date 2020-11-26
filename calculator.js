@@ -1,8 +1,8 @@
-var array = [ "(","(", "2", "+" ,"2",")","*","(","2","+","2",")",")", "*" , "2","*","(","1","+","1",")"];
+var array = [ "(","(", "2", "+" ,"2",")","*","2",")","+","(","3","*","(","2","+","7",")",")"];
 
-postfixCompute(infixToPostfix(array));
+PostfixCompute(InfixToPostfix(array));
 
-function postfixCompute(array){
+function PostfixCompute(array){
     var postfixStack = new Array();
     for (i = 0; i < array.length; i++) {
 
@@ -17,10 +17,11 @@ function postfixCompute(array){
             Push(postfixStack,Operation(array[i], x,y));
         }
     }
-    return console.log("Final Answer: "+postfixStack[postfixStack.length - 1]);
+    console.log("Final Answer: "+postfixStack[postfixStack.length - 1]);
+    return postfixStack[postfixStack.length - 1];
 }
 
-function infixToPostfix(array){
+function InfixToPostfix(array){
     var postfixStack = new Array();
     var operatorStack = new Array();
 
@@ -29,17 +30,17 @@ function infixToPostfix(array){
         var temp = parseFloat(array[i]);
         var index = array[i];
 
-        var isOpenParethesis = compareValueTo(index, "(");
-        var isCloseParethesis = compareValueTo(index, ")");
+        var isOpenParethesis = CompareValueTo(index, "(");
+        var isCloseParethesis = CompareValueTo(index, ")");
+        
         if(!isNaN(temp)){
             Push(postfixStack, index);
         }
-        else if(isOperator(index)){
-            var boolTemp = isHigherPrecedence(operatorStack[operatorStack.length - 1]);
+        else if(IsOperator(index)){
+            var boolTemp = IsHigherPrecedence(operatorStack[operatorStack.length - 1]);
             while(boolTemp && operatorStack.length != 0){
                 Push(postfixStack, Pop(operatorStack));
             }
-
             Push(operatorStack, index);
         }
         else if(isOpenParethesis){
@@ -47,7 +48,7 @@ function infixToPostfix(array){
         }
         else if(isCloseParethesis){
             while(operatorStack.length != 0){
-                if(!compareValueTo(operatorStack[operatorStack.length - 1],"(")){
+                if(!CompareValueTo(operatorStack[operatorStack.length - 1],"(")){
                     Push(postfixStack, Pop(operatorStack));
                 }
                 else {
@@ -81,7 +82,7 @@ function Operation(operator, x , y){
     }
 }
 
-function isOperator(value){
+function IsOperator(value){
     switch (value)
     {
         case "+":
@@ -92,7 +93,7 @@ function isOperator(value){
     }
     return false;
 }
-function isHigherPrecedence(value){
+function IsHigherPrecedence(value){
     switch (value)
     {
         case "*":
@@ -101,7 +102,7 @@ function isHigherPrecedence(value){
     }
     return false;
 }
-function compareValueTo(value, compareTo){
+function CompareValueTo(value, compareTo){
     if (value === compareTo)
         {
             return true;
@@ -115,6 +116,7 @@ function Print(array){
         temp += x;
     });
     console.log(temp);
+    return temp;
 }
 function Push(array, value){ array.push(value); }
 function Pop(array){ return array.pop(); }

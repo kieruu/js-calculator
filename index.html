@@ -5,10 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
-    <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet">
 </head>
 <body>
-    <p id="lol">dsdsd</p>
-    <button onclick="change()">click!</button>
+    <div class="container display-flex flex-center">
+        <div id="calculator" class="display-flex flex-col">
+            <div id="calculator-screen" class="display-flex flex-col" style="flex: 3 1 0px;">
+                <div id="calculator-screen-operation" class="box display-flex flex-row-r" style="flex: 2 1 0px;">
+                    <p id="operation-text"></p>
+                </div>
+                <div id="calculator-screen-total" class="box display-flex flex-row-r" style="flex: 8 1 0px;">
+                    <h1 id="total-text"></h1>
+                </div>
+            </div>
+            <div id="calculator-pad" class="box display-flex flex-col" style="flex: 7 1 0px;">
+                <div class="numpad-row display-flex" style="flex: 2 1 0px">
+                    <div onclick="getParenthesis('(')" class="num-cell others display-flex flex-center" style="flex: 2 1 0px">(</div> 
+                    <div onclick="getParenthesis(')')" class="num-cell others display-flex flex-center" style="flex: 2 1 0px">)</div>
+                    <div onClick="getClear()" class="num-cell others display-flex flex-center" style="flex: 2 1 0px">C</div>
+                    <div onclick="getOperator('/')" class="num-cell operation display-flex flex-center" style="flex: 2 1 0px">/</div>
+                </div>
+                <div class="numpad-row display-flex" style="flex: 2 1 0px">
+                    <div onclick="getOperand('1')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">1</div>
+                    <div onclick="getOperand('2')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">2</div>
+                    <div onclick="getOperand('3')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">3</div>
+                    <div onclick="getOperator('*')" class="num-cell operation display-flex flex-center" style="flex: 2 1 0px">X</div>
+                </div>
+                <div class="numpad-row display-flex" style="flex: 2 1 0px">
+                    <div onclick="getOperand('4')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">4</div>
+                    <div onclick="getOperand('5')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">5</div>
+                    <div onclick="getOperand('6')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">6</div>
+                    <div onclick="getOperator('-')" class="num-cell operation display-flex flex-center" style="flex: 2 1 0px">-</div>
+                </div>
+                <div class="numpad-row display-flex" style="flex: 2 1 0px">
+                    <div onclick="getOperand('7')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">7</div>
+                    <div onclick="getOperand('8')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">8</div>
+                    <div onclick="getOperand('9')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">9</div>
+                    <div onclick="getOperator('+')" class="num-cell operation display-flex flex-center" style="flex: 2 1 0px">+</div>
+                </div>
+                <div class="numpad-row display-flex" style="flex: 2 1 0px">
+                    <div onclick="getOperand('.')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">.</div>
+                    <div onclick="getOperand('0')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">0</div>
+                    <div class="num-cell number display-flex flex-center" style="flex: 2 1 0px"></div>
+                    <div onclick="getEqual()" class="num-cell equal display-flex flex-center" style="flex: 2 1 0px">=</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="calculator.js"></script>
+<script src="validator.js"></script>
 </html>
