@@ -36,10 +36,15 @@ body {
 	background-color: green;
 	box-shadow: 4px 6px 14px -5px rgba(0, 0, 0, 0.54);
 }
+#calculator-screen-total {
+	word-break: break-all;
+}
+
 #operation-text,
 #total-text {
 	align-self: flex-end;
 	margin-right: 20px;
+	margin-left: 20px;
 	margin-bottom: 5px;
 	color: #535c68;
 }
