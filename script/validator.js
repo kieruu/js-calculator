@@ -1,12 +1,17 @@
 var infix = new Array();
 var operand = "";
 
-var prevResult;                         // store previous result after the operation
-var prevOperand;                        // store previous operands
-var boolOperationComplete;              // var used to determine if operation is complete(when user click equal)
+ // store previous result after the operation
+var prevResult;                       
+// store previous operands
+var prevOperand;           
+// var used to determine if operation is complete(when user click equal)
+var boolOperationComplete;              
 
-var parenthesisCounter = 0;             // counts how many open parenth are there.
-var parenthesisOperation = false;       // bool value, determine if operation inside parenth is complete.
+// counts how many open parenth are there.
+var parenthesisCounter = 0;      
+// bool value, determine if operation inside parenth is complete.       
+var parenthesisOperation = false;       
 
 function getOperand(value) {
     /* if the previous operation is complete and new operation is perform, reset the operation-text display */
@@ -20,7 +25,8 @@ function getOperand(value) {
 }
 
 function getOperator(operator){
-    var boolShowOperator;               // var used to determine whether to show the operands after specific operation
+    // var used to determine whether to display the operands after specific operation
+    var boolShowOperator;               
 
     /* if the previous operation is complete and new operation is perform reset the operation-text display */
     if(boolOperationComplete){
@@ -45,7 +51,7 @@ function getOperator(operator){
      }
 
     /* 
-        if user did not enter the operand at new or after clear operation, add 0 as operand or if 
+        if user enter operator and did not enter the operand at new or after clear operation, add 0 as operand or if 
         the result from previous operation exist, take the value and add it as an operand.
     */
     if((!operand)){
@@ -82,8 +88,8 @@ function getOperator(operator){
             getResult();
             Push(infix, operator);
         }
-        /* else, just push the operand. If the next operation is HigherPrecedence(Mul/Div), push the operator(Mul/Div). 
-        if not HigherPrecedence(Add/Sub), immediately perform operation
+        /* else(Add/Sub), just push the operand. If the next operation is HigherPrecedence(Mul/Div), 
+        push the operator(Mul/Div). if not HigherPrecedence(Add/Sub), immediately perform operation
         and store result and the next operation respectively.  */
         else if(!IsHigherPrecedence(Peek(infix))){
             Push(infix, operand);
@@ -131,10 +137,12 @@ function getParenthesis(parethesis){
         }
         parenthesisCounter--;
 
-        if(IsOperator(Peek(infix)) && !operand){        // if no operand, get the prevOperand instead.
+        // if no operand, get the prevOperand instead.
+        if(IsOperator(Peek(infix)) && !operand){        
             operand = prevOperand;
         }
-        else if(CompareValueTo(Peek(infix), "(")){      // if open parenth, followed by close, add zero in the middle
+        // if open parenth, followed by close parenth, add zero in the middle
+        else if(CompareValueTo(Peek(infix), "(")){      
             operand = "0"
         }
         Push(infix, operand);
@@ -156,17 +164,22 @@ function getResult(){
     }
     var res = PostfixCompute(InfixToPostfix(infix));
     UpdateResult(res);
-    infix = [];                                         // empty the array
+    // empty the array
+    infix = [];                                         
     for (let i = 0; i < parenthesisCounter; i++) {
-        Push(infix, "(");                               // store open parenth, depends on the counter how many times.
+        // store open parenth, depends on the counter how many times.
+        Push(infix, "(");                               
     }
-    Push(infix, res);                                   // push the result
-    prevResult = res;                                   // store the result to previous result
+    // push the result
+    Push(infix, res);
+    // store the result to previous result                                   
+    prevResult = res;                                   
 }
 
 /* Solve the problem, when user click the equal button */
 function getEqual(){
-    boolOperationComplete = true;                       // true if the operation is complete
+    // true if the operation is complete
+    boolOperationComplete = true;                       
     var res
 
     /* if the user immediately click the equal without 2nd operand, take the 1st operand value 
@@ -175,8 +188,10 @@ function getEqual(){
         operand = prevResult || prevOperand;
     }
 
-    Push(infix, operand);                               // push the last operand
-    for (let i = 0; i < parenthesisCounter; i++) {      // if counter still remain, push the close parenth
+    // push the last operand
+    Push(infix, operand);             
+    // if counter still remain, push the close parenth                  
+    for (let i = 0; i < parenthesisCounter; i++) {      
         Push(infix, ")");
     }
     res = PostfixCompute(InfixToPostfix(infix));
@@ -195,11 +210,13 @@ function getEqual(){
     }
 
     UpdateOperation("=");
-    infix = [];                                         // reset the array
+    // reset the array
+    infix = [];                                         
     operand = "";
     parenthesisCounter = 0;
     parenthesisOperation = false;
-    prevResult = res;                                   // store result to prevResult
+    // store result to prevResult
+    prevResult = res;                                   
 }
 
 /* reset everything in the calculator */
