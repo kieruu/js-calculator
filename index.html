@@ -45,9 +45,11 @@
                     <div onclick="getOperator('+')" class="num-cell operation display-flex flex-center" style="flex: 2 1 0px">+</div>
                 </div>
                 <div class="numpad-row display-flex" style="flex: 2 1 0px">
-                    <div onclick="getOperand('.')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">.</div>
+                    <div onclick="getPlusMinus()" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">
+                        <img src="img/icons8-plus-minus-50.png" alt="plus-minus" width="32" height="auto">
+                    </div>
                     <div onclick="getOperand('0')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">0</div>
-                    <div class="num-cell number display-flex flex-center" style="flex: 2 1 0px"></div>
+                    <div onclick="getOperand('.')" class="num-cell number display-flex flex-center" style="flex: 2 1 0px">.</div>
                     <div onclick="getEqual()" class="num-cell equal display-flex flex-center" style="flex: 2 1 0px">=</div>
                 </div>
             </div>
@@ -56,5 +58,9 @@
 </body>
 <script src="script/stack.js"></script>
 <script src="script/calculator.js"></script>
-<script src="script/validator.js"></script>
+<script src="script/validator/global_scope.js"></script>
+<script src="script/validator/operand_validator.js"></script>
+<script src="script/validator/operator_validator.js"></script>
+<script src="script/validator/parethesis_validator.js"></script>
+<script src="script/validator/result_validator.js"></script>
 </html>

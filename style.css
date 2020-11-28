@@ -53,6 +53,7 @@ body {
 }
 #total-text {
 	font-size: 52px;
+	font-weight: 500;
 }
 
 .num-cell {
@@ -63,14 +64,15 @@ body {
 	color: white;
 }
 .number {
-	background-color: #34495e;
+	background-color: #262626;
 }
 .number:hover {
-	background-color: #314559;
+	background-color: #232222;
 }
 
 .operation {
 	background-color: #3498db;
+	font-size: 30px;
 }
 .operation:hover {
 	background-color: #308ec9;
@@ -83,8 +85,8 @@ body {
 	background-color: #2aba66;
 }
 .others {
-	background-color: #2f4154;
+	background-color: #232323;
 }
 .others:hover {
-	background-color: #2c3d4f;
+	background-color: #232121;
 }

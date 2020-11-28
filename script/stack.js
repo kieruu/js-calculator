@@ -1,7 +1,7 @@
 function Print(array){
     var temp = "";
     array.forEach(x => {
-        temp += x;
+        temp += x +",";
     });
     console.log(temp);
     return temp;
