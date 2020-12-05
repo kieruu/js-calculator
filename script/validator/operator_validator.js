@@ -35,6 +35,7 @@ function getOperator(operator){
         }
         var temp = n || "0";  
         operand = temp;
+        console.log(operand);
     }
 
     /* if the operation complete inside the parethesis, prevent the result from showing
@@ -46,8 +47,7 @@ function getOperator(operator){
         parenthesisOperation = false;
     }
 
-    /* This is the main function for solving the problem
-    if the operand is the first and not an operator, just push the operand and the operator. */
+    /* if the operand is the first and not an operator, just push the operand and the operator. */
     if(!IsOperator(Peek(infix))){
         Push(infix, Operand());
         Push(infix, operator);

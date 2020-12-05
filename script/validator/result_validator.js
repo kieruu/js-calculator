@@ -32,7 +32,7 @@ function getEqual(){
     }
 
     // push the last operand
-    Push(infix, Operand());             
+    Push(infix, Operand());            
     // if counter still remain, push the close parenth                  
     for (let i = 0; i < parenthesisCounter; i++) {      
         Push(infix, ")");

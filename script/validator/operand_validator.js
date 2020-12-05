@@ -1,10 +1,11 @@
 function getOperand(value) {
-    /* if the previous operation is complete and new operation is perform, reset the operation-text display */
+    /*reset the operation-text display */
     if(boolOperationComplete){
         boolOperationComplete = false;
         UpdateOperation("", true);
     }
 
+    /* prevent double dot */
     if(Peek(operand) === "." && value === "."){
         return;
     }
@@ -13,10 +14,12 @@ function getOperand(value) {
         if(value === "."){
             operand = "0.";
         }
+        /* if operand start at zero, replace it with numbers except 0 */
         else {
             operand = value;
         }
     }
+    /* add 0 at the start if operands start at '.' */
     else if(operand === "" && value === "."){
         operand = "0.";
     }
@@ -27,10 +30,44 @@ function getOperand(value) {
     UpdateResult(operand);
 }
 
-/* return value removing unnecessary 0 and last index of dot
-   e.g: 12.00000000 = 12, 53. = 53
-*/
 function Operand(){
-    operand = operand.replace(/(\.0*)$/, '');
+    /* does not apply replace if operand only value is 0 */
+    if(!(operand.length == 1 && operand[operand.length - 1] === "0")){
+        // execute statement if operand ends with dot or dot with trailing zero
+        if(IsMatchRegex(operand, /(\.0*)$/)){
+            operand = operand.replace(/(\.0*)$/, '');
+        }
+        // execute statement if operand ends with trailing zero after the decimal
+        else if(IsMatchRegex(operand, /^(\d+\.\d*?[1-9])0+$/)){
+            operand = operand.replace(/^(\d+\.\d*?[1-9])0+$/, "$1");
+        }
+    }
     return operand;
+}
+
+function getPlusMinus(){
+    var operandHolder = operand || prevResult || prevOperand ;
+    var firstIndexOperand = operandHolder.toString().charAt(0);
+    var isNegativeAlready = CompareValueTo(firstIndexOperand, "-");
+    var newOperand = "";
+
+    if(CompareValueTo(operandHolder, "0")){
+        return;
+    }
+
+    if(isNegativeAlready){
+        newOperand = operandHolder.toString().substring(1, operandHolder.length);
+    }
+    else {
+        newOperand = "-" + operandHolder;
+    }
+
+    if(prevResult){
+        prevResult = newOperand;
+    }
+    else{
+        operand = newOperand;
+    }
+    UpdateResult(newOperand);
+
 }
