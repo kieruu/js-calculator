@@ -14,8 +14,8 @@ function getOperator(operator){
     if(!operand && IsOperator(Peek(infix))){
         var operationText = document.getElementById("operation-text").innerHTML;
         var temp = "";
-        for (let index = 0; index < operationText.length - 1; index++) {
-            temp += operationText[index];
+        for (let i = 0; i < operationText.length - 1; i++) {
+            temp += operationText[i];
         }
         temp += operator;
         Pop(infix);
@@ -49,7 +49,7 @@ function getOperator(operator){
 
     /* if the operand is the first and not an operator, just push the operand and the operator. */
     if(!IsOperator(Peek(infix))){
-        Push(infix, Operand());
+        Push(infix, FormattedOperand());
         Push(infix, operator);
     }
     else {
@@ -58,7 +58,7 @@ function getOperator(operator){
             respectively. e.g 2*3 + 1 = 6 + 1
             */
         if(IsHigherPrecedence(Peek(infix))){
-            Push(infix, Operand());
+            Push(infix, FormattedOperand());
             getResult();
             Push(infix, operator);
         }
@@ -66,7 +66,7 @@ function getOperator(operator){
         push the operator(Mul/Div). if not HigherPrecedence(Add/Sub), immediately perform operation
         and store result and the next operation respectively.  */
         else if(!IsHigherPrecedence(Peek(infix))){
-            Push(infix, Operand());
+            Push(infix, FormattedOperand());
             /* if the next operation is HigherPrecedence(Mul/Div), just push it into array */
             if(IsHigherPrecedence(operator)){
                 Push(infix, operator);
@@ -78,9 +78,11 @@ function getOperator(operator){
         }
     }
     if(!boolShowOperator){
-        UpdateOperation(operand);
+        let formattedOperand = FormatNumberWithComma(operand);
+        UpdateOperation(formattedOperand);
     }
     UpdateOperation(operator);
     prevOperand = operand;
+    prevOperator = operator;
     operand = "";
 }

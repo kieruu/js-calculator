@@ -1,12 +1,15 @@
 /* Solve the problem, during the opration */
 function getResult(){
-    
+    var res, formattedResult;
+
     /* if counter remain, push the close parenth, without decrementing the counter */
     for (let i = 0; i < parenthesisCounter; i++) {
         Push(infix, ")");
     }
-    var res = PostfixCompute(InfixToPostfix(infix));
-    UpdateResult(res);
+    res = PostfixCompute(InfixToPostfix(infix));
+    formattedResult = FormatNumberWithComma(res.toString());
+    UpdateResult(formattedResult);
+
     // empty the array
     infix = [];                                         
     for (let i = 0; i < parenthesisCounter; i++) {
@@ -21,10 +24,26 @@ function getResult(){
 
 /* Solve the problem, when user click the equal button */
 function getEqual(){
-    // true if the operation is complete
-    boolOperationComplete = true;                       
-    var res
+    var res, formattedResult, formattedOperand;
+    
+    /* execute when user click/press Equal twice */
+    if(boolOperationComplete){
+        UpdateOperation("", true);
+        /* execute if user input is operand only */
+        if(!prevOperator){
+            UpdateOperation(FormatNumberWithComma(prevOperand.toString()));
+            UpdateOperation("=");
+            return;
+        }
 
+        /* perform operation of previous result and previous operand */
+        Push(infix, prevResult);
+        Push(infix, prevOperator);
+        UpdateOperation(FormatNumberWithComma(prevResult.toString()));
+        UpdateOperation(prevOperator);
+        operand = prevOperand;
+    }
+    
     /* if the user immediately click the equal without 2nd operand, take the 1st operand value or previous result
     and use it instead */
     if(!operand){
@@ -32,20 +51,21 @@ function getEqual(){
     }
 
     // push the last operand
-    Push(infix, Operand());            
+    Push(infix, FormattedOperand());            
     // if counter still remain, push the close parenth                  
     for (let i = 0; i < parenthesisCounter; i++) {      
         Push(infix, ")");
     }
     res = PostfixCompute(InfixToPostfix(infix));
-    UpdateResult(res);
+    formattedResult = FormatNumberWithComma(res.toString());
 
     /* prevent showing operand, when operation is complete inside parenth, because the problem is already solved
        when user input the close parenth, which leaves only one value in array, the result. Thus, this prevent it
        from showing.
     */
     if(!parenthesisOperation){
-        UpdateOperation(operand);
+        formattedOperand = FormatNumberWithComma(operand);
+        UpdateOperation(formattedOperand);
     }
     
     for (let i = 0; i < parenthesisCounter; i++) {
@@ -53,12 +73,15 @@ function getEqual(){
     }
 
     UpdateOperation("=");
+    UpdateResult(formattedResult);
+    prevOperand = operand;
+    boolOperationComplete = true;               
+
     // reset the array
     infix = [];    
     prevResult = res;                                   
     operand = "";
     parenthesisCounter = 0;
     parenthesisOperation = false;
-    // store result to prevResult
 }
 

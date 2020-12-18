@@ -6,7 +6,8 @@ var operand = "0";
 var prevResult;                       
 // store previous operands
 var prevOperand;           
-var boolOperationComplete;              
+var prevOperator;
+var boolOperationComplete = false;              
 
 var parenthesisCounter = 0;      
 var parenthesisOperation = false;       
@@ -24,6 +25,7 @@ function getClear(){
     UpdateResult(operand);
     prevResult = 0;
     prevOperand = 0;
+    prevOperator = "";
 }
 
 /* update the result in the calculator */
@@ -44,4 +46,12 @@ function UpdateOperation(value, isClear){
 /* return true if value match the pattern */
 function IsMatchRegex(value, pattern){
     return pattern.test(value);
+}
+
+function FormatNumberWithComma(operand){
+    let operandWithComma = operand;
+    if(IsMatchRegex(operand, /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/)){
+        operandWithComma = operand.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return operandWithComma;
 }

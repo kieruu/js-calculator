@@ -46,14 +46,15 @@ body {
 	margin-right: 20px;
 	margin-left: 20px;
 	margin-bottom: 5px;
-	color: #535c68;
 }
 #operation-text {
 	font-size: 24px;
+	color: #535c68;
 }
 #total-text {
 	font-size: 52px;
 	font-weight: 500;
+	color: #252525;
 }
 
 .num-cell {

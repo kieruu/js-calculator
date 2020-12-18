@@ -32,7 +32,7 @@ function getParenthesis(parethesis){
         else if(CompareValueTo(Peek(infix), "(")){      
             operand = "0"
         }
-        Push(infix, Operand());
+        Push(infix, FormattedOperand());
         Push(infix, parethesis);
         UpdateOperation(operand);
         UpdateOperation(parethesis);

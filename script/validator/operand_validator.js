@@ -27,10 +27,11 @@ function getOperand(value) {
         operand += value;
     }
 
-    UpdateResult(operand);
+    let formattedOperand = FormatNumberWithComma(operand);
+    UpdateResult(formattedOperand);
 }
 
-function Operand(){
+function FormattedOperand(){
     /* does not apply replace if operand only value is 0 */
     if(!(operand.length == 1 && operand[operand.length - 1] === "0")){
         // execute statement if operand ends with dot or dot with trailing zero
@@ -68,6 +69,7 @@ function getPlusMinus(){
     else{
         operand = newOperand;
     }
-    UpdateResult(newOperand);
+
+    UpdateResult(FormatNumberWithComma(newOperand));
 
 }
