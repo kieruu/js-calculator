@@ -12,10 +12,23 @@ function getParenthesis(parethesis){
         if(parenthesisOperation){
             getClear();
         }
+
+        
+        if(!IsOperator(Peek(infix)) && !CompareValueTo(operand, "0")){
+            console.log(operand)
+            Push(infix, FormattedOperand());
+            Push(infix, "*");
+            UpdateOperation(FormatNumberWithComma(operand));
+            UpdateOperation("*");
+
+            prevOperand = operand;
+            prevOperator = "*";
+            operand = "";
+            console.log("yo")
+        }
         Push(infix, parethesis);
         UpdateOperation(parethesis);
         parenthesisCounter++;
-        console.log("open:" +parenthesisCounter);
     }
     else {
         /* if the counter is 0, do nothing, it means there are no open parethesis w/o close parenthesis.*/
@@ -29,7 +42,7 @@ function getParenthesis(parethesis){
             operand = prevOperand;
         }
         // if open parenth, followed by close parenth, add zero in the middle
-        else if(CompareValueTo(Peek(infix), "(")){      
+        else if(CompareValueTo(Peek(infix), "(") && !operand){      
             operand = "0"
         }
         Push(infix, FormattedOperand());
