@@ -24,7 +24,6 @@ function getParenthesis(parethesis){
             prevOperand = operand;
             prevOperator = "*";
             operand = "";
-            console.log("yo")
         }
         Push(infix, parethesis);
         UpdateOperation(parethesis);
@@ -47,7 +46,7 @@ function getParenthesis(parethesis){
         }
         Push(infix, FormattedOperand());
         Push(infix, parethesis);
-        UpdateOperation(operand);
+        UpdateOperation(FormatNumberWithComma(operand));
         UpdateOperation(parethesis);
         getResult();
         operand = "";

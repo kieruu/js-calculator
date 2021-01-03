@@ -2,9 +2,7 @@ var infix = new Array();
 
 var operand = "0";
 
- // store previous result after the operation
 var prevResult;                       
-// store previous operands
 var prevOperand;           
 var prevOperator;
 var boolOperationComplete = false;              

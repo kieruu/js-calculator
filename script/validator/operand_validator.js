@@ -5,6 +5,10 @@ function getOperand(value) {
         UpdateOperation("", true);
     }
 
+    if(operand.length >= 20){
+        return;
+    }
+
     /* prevent double dot */
     if(Peek(operand) === "." && value === "."){
         return;

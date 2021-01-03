@@ -31,18 +31,25 @@ body {
 }
 
 #calculator {
-	background-color: green;
+	background-color: #fcfcfc;
 	box-shadow: 4px 6px 14px -5px rgba(0, 0, 0, 0.54);
 }
 #calculator-screen-total {
 	word-break: break-all;
 }
 
+#calculator-screen-operation {
+	overflow-x: auto;
+	white-space: nowrap;
+	margin: 0 15px;
+}
+
+#calculator-screen-operation::-webkit-scrollbar {
+	display: none;
+}
+
 #operation-text,
 #total-text {
-	align-self: flex-end;
-	margin-right: 20px;
-	margin-left: 20px;
 	margin-bottom: 5px;
 }
 #operation-text {
@@ -53,10 +60,13 @@ body {
 	font-size: 52px;
 	font-weight: 500;
 	color: #252525;
+
+	align-self: flex-end;
+	margin-right: 20px;
+	margin-left: 20px;
 }
 
 .num-cell {
-	background-color: yellow;
 	text-align: center;
 	font-size: 22px;
 	cursor: pointer;
@@ -74,7 +84,7 @@ body {
 }
 
 .others {
-	background-color: #232323;
+	background-color: #262626;
 }
 
 @media (min-width: 320px) {

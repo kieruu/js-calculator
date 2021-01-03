@@ -64,7 +64,7 @@ function getEqual(){
        from showing.
     */
     if(!parenthesisOperation){
-        formattedOperand = FormatNumberWithComma(operand);
+        formattedOperand = FormatNumberWithComma(operand.toString());
         UpdateOperation(formattedOperand);
     }
     
